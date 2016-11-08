@@ -14,6 +14,9 @@ static NSString * const cycleCellIdentifier = @"CycleCell";
 
 @property (nonatomic, strong)UICollectionView *collectionView;
 
+@property (nonatomic, assign)NSInteger timeInterval;
+@property (nonatomic, assign)BOOL isRepeat;
+@property (nonatomic, strong)NSTimer *timer;
 @end
 
 @implementation CTCycleView
@@ -41,6 +44,8 @@ static NSString * const cycleCellIdentifier = @"CycleCell";
 
 - (void)initialization {
     
+    _timeInterval = 2;
+    _isRepeat = YES;
 }
 
 - (void)setupCollectionView {
@@ -60,10 +65,22 @@ static NSString * const cycleCellIdentifier = @"CycleCell";
     
 }
 
+#pragma mark - private method
+
+- (void)automaticalScroll {
+   
+    
+   
+}
+
 #pragma maek - Getter & Setter
 - (void)setImagesGroup:(NSArray *)imagesGroup {
     _imagesGroup = imagesGroup;
     [self.collectionView reloadData];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval target:self selector:@selector(automaticalScroll) userInfo:nil repeats:_isRepeat];
+    
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    [runLoop addTimer:_timer forMode:NSDefaultRunLoopMode];
 }
 
 #pragma mark - UICollectionView DataSource

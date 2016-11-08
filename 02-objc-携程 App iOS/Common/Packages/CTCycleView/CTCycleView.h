@@ -13,6 +13,8 @@
 @property (nonatomic, strong)NSArray *imagesGroup;
 @property (nonatomic, strong)NSArray *titlesGroup;
 
+
+
 + (instancetype)cycleViewWithFrame:(CGRect)frame images:(NSArray *)images titles:(NSArray *)titles;
 
 @end
